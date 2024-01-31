@@ -66,11 +66,7 @@ setup(
     extras_require={
         'scienceworld': ['scienceworld'],
         'touchdown': ['networkx'],
-        'alfworld': [
-            'fast-downward @ https://github.com/MarcCote/downward/archive/faster_replan.zip',
-            'textworld @ https://github.com/MarcCote/TextWorld/archive/handcoded_expert_integration.zip',
-            'alfworld @ git+https://github.com/vzhong/alfworld.git',
-        ],
+        'alfworld': ['alfworld[full]'],
         'preprocess': ['transformers', 'patchify', 'spacy']
     },
 
