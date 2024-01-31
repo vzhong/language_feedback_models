@@ -1,0 +1,9 @@
+hydra-core
+ujson
+jsonargparse
+lightning
+openai
+tenacity
+evaluate
+transformers
+scikit-learn

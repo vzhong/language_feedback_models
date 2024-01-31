@@ -1,0 +1,39 @@
+hydra:
+  run:
+    dir: ./data/gold/${env.name}/${prompt.history}
+  job:
+    env_set:
+      VERBENVS_DATA: '${hydra:runtime.cwd}/../verbalized_envs/data'
+
+prompt:
+  history: 'response'  # actions, response
+  action:
+    type: admissible
+    num_examples: 100
+    numbered: false
+
+env:
+  name: alfworld
+  max_steps: 200
+  seed: 0
+  max_settings: 2000
+  splits: 'train'
+  invalid_action: 'raise'
+
+model: 'google/flan-t5-large'  # set this to your huggingface model cache
+
+eval:
+  split: 'dev'
+  max_steps: 80
+  aggregation: 'mean'  # mean, sum, generate
+  num_beams: 4
+  subsample: 1.0
+  sample: false
+  num_shards: 0
+  shard: 0
+  dsave: '${hydra:runtime.cwd}/outputs/bc/${env.name}/ctx=20,data=train/flan_t5'
+  dout: null
+  batch_size: 100
+
+logging:
+  verbose_step: false

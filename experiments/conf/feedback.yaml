@@ -1,0 +1,5 @@
+api:
+  mode: openai
+  fsecrets: "conf/secrets.json"
+  max_tokens: 256
+  model: 'gpt-4'  # 'gpt-35-turbo, gpt-4' 

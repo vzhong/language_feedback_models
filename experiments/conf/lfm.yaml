@@ -1,0 +1,38 @@
+hydra:
+  run:
+    dir: ${dout}/reward/${env}/${feedback}/${name}_${p_pos}/
+  job:
+    chdir: true
+
+name: 'default'
+env: 'alfworld'
+eval_name: 'dev'
+model: 'google/flan-t5-large'  # set this to your huggingface model cache
+ddata_root: '${hydra:runtime.cwd}/data'
+ddata: '${ddata_root}/feedback/${env}/ctx=${context_window},data=train/${p_pos}'
+feedback: 'intent'
+num_workers: 16
+batch_size: 20
+context_window: 20
+p_pos: 0.0
+accumulate_grad_batches: 10
+train_epochs: 20
+tune_batch_size: false
+val_interval: 0.25
+grad_clip: 5.
+learning_rate: 0.00005
+weight_averaging: 0.01
+max_len_input: 2048
+max_len_output: 64
+dout: './outputs'
+seed: 37
+infer_feedback: null
+pred_only: false
+
+eval:
+  perform: false
+  split: 'train'
+  max_steps: 80
+  aggregation: 'mean'  # mean, sum
+  num_beams: 4
+  subsample: 1.0

@@ -1,0 +1,42 @@
+hydra:
+  run:
+    dir: ${dout}/bc/${env}/ctx=${context_window},data=${train_data}/${name}/
+  job:
+    chdir: true
+
+name: 'flan_t5'
+env: 'alfworld'
+train_data: 'train'
+val_data: 'eval'
+resume: null
+model: 'google/flan-t5-large'  # set this to your huggingface model cache
+ddata_root: '${hydra:runtime.cwd}/data'
+ddata: '${ddata_root}/bc/${env}/context=${context_window}'
+num_workers: 16
+batch_size: 20
+accumulate_grad_batches: 10
+train_epochs: 20
+tune_batch_size: false
+val_interval: 200
+grad_clip: 5.
+learning_rate: 0.00005
+weight_averaging: 0.01
+max_len_input: 2048
+max_len_output: 16
+context_window: 20
+dout: '${hydra:runtime.cwd}/outputs'
+seed: 37
+
+eval:
+  split: 'dev'
+  max_steps: 80
+  aggregation: 'mean'  # mean, sum, generate
+  num_beams: 4
+  subsample: 1.0
+  sample: false
+  num_shards: 0
+  shard: 0
+  dsave: null
+  dout: null
+  batch_size: 100
+  round: 1
