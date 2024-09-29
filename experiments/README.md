@@ -39,7 +39,7 @@ python show_eval.py --root outputs/bc/alfworld/ctx=20,data=train/flan_t5/eval/de
 1. Getting batched LLM feedback
 
 First, get feedback from GPT4 using the OpenAI API.
-To do this, create a `conf/secrest.json` as follows:
+To do this, create a `conf/secrets.json` as follows:
 
 ```
 {
